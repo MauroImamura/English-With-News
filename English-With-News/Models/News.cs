@@ -8,11 +8,11 @@
 
         public IEnumerable<string> tags { get; set; }
 
-        public string source { get; set; }
+        public string link { get; set; }
     }
 
     public class NewsList
     {
-        public IEnumerable<News> News { get; set; }
+        public IEnumerable<News> currentNews { get; set; }
     }
 }

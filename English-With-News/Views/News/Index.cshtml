@@ -1,6 +1,12 @@
-﻿<h1>NEW LIST</h1>
+﻿@model NewsList
+
+<h1 style="text-align:center">NEW LIST</h1>
 <ul>
-    <li>ITEM 1</li>
-    <li>ITEM 2</li>
-    <li>ITEM 3</li>
+    @foreach(News news in Model.currentNews)
+    {
+        <li>
+            <h2 style="font-size:15px;font-weight:500">@news.headline</h2>
+            <p style="font-size:12px;font-weight:200">@news.summmary</p>
+        </li>
+    }
 </ul>

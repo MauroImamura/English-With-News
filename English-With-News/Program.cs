@@ -1,7 +1,12 @@
+using English_With_News.Models;
+using English_With_News.Models.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<INewsRepository,NewsRepository>();
 
 var app = builder.Build();
 

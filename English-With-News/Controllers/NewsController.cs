@@ -18,5 +18,11 @@ namespace English_With_News.Controllers
             newsList.currentNews = _newsRepository.CreateNewsList();
             return View(newsList);
         }
+
+        [HttpPost]
+        public void Meaning(string word)
+        {
+            _newsRepository.Meaning(word);
+        }
     }
 }

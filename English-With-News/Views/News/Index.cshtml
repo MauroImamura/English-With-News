@@ -1,6 +1,9 @@
 ﻿@model NewsList
 
 <h1 style="text-align:center">NEW LIST</h1>
+<br/>
+<p id="meaningConsult" data-id="hello">Hello</p>
+<br/>
 <ul>
     @foreach(News news in Model.currentNews)
     {
@@ -10,3 +13,30 @@
         </li>
     }
 </ul>
+
+<!-- Sweet Alert-->
+<link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+<script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $('#meaningConsult').click(function () {
+        var word = $(this).attr("data-id");
+        var url = "/news/Meaning";
+
+        $.post(url, { word: word }, function(data) {
+            Swal.fire(
+                {
+                    text: "Hello",
+                    icon: "success",
+                    showCancelButton: 0,
+                    confirmButtonColor: "#6D3227",
+                    confirmButtonText: "OK"
+                }
+            );
+        });
+    });
+
+</script>

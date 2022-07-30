@@ -1,4 +1,5 @@
 ﻿using English_With_News.Models.Interfaces;
+using System.Net.Http.Headers;
 using System.ServiceModel.Syndication;
 using System.Xml;
 
@@ -37,5 +38,22 @@ namespace English_With_News.Models
 
             return newsList;
         }
+
+        public async Task<string> Meaning(string word)
+        {
+            string ret = "";
+
+            HttpClient client = new HttpClient();
+
+            Uri baseLink = new Uri($"https://api.dictionaryapi.dev/api/v2/entries/en/{word}");
+
+            HttpResponseMessage response = await client.GetAsync(baseLink);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            //System.Diagnostics.Debug.WriteLine(responseBody);
+
+            return responseBody;
+        }
     }
+
 }

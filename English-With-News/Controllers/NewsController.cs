@@ -1,6 +1,7 @@
 ﻿using English_With_News.Models;
 using English_With_News.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace English_With_News.Controllers
 {
@@ -20,9 +21,18 @@ namespace English_With_News.Controllers
         }
 
         [HttpPost]
-        public void Meaning(string word)
+        public string Meaning(string word)
         {
-            _newsRepository.Meaning(word);
+            string ans = "";
+            string apiAns = _newsRepository.Meaning(word).Result;
+            apiAns = apiAns.Remove(apiAns.Length-1).Substring(1);
+            
+            if(apiAns != null)
+            {
+                ans = apiAns;
+            }
+
+            return ans;
         }
     }
 }

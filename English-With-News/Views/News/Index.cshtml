@@ -27,16 +27,32 @@
         var url = "/news/Meaning";
 
         $.post(url, { word: word }, function(data) {
+            var information = $.parseJSON(data);
+            var title = information.word.toUpperCase();
+            var meanings = information.meanings;
+            var arr = [];
+            meanings.forEach(meanList);
+
             Swal.fire(
                 {
-                    text: "Hello",
-                    icon: "success",
+                    title: title,
+                    text: meanings,
+                    //icon: "success",
                     showCancelButton: 0,
                     confirmButtonColor: "#6D3227",
-                    confirmButtonText: "OK"
+                    confirmButtonText: "Close"
                 }
             );
         });
     });
+
+    function meanList(mean){
+        var x = mean.definitions;
+        x.forEach(func)
+        function func(item)
+        {
+            console.log(item.definition);
+        };
+    };
 
 </script>

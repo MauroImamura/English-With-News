@@ -41,7 +41,6 @@ namespace English_With_News.Models
 
         public async Task<string> Meaning(string word)
         {
-            string ret = "";
 
             HttpClient client = new HttpClient();
 
@@ -50,7 +49,6 @@ namespace English_With_News.Models
             HttpResponseMessage response = await client.GetAsync(baseLink);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
-            //System.Diagnostics.Debug.WriteLine(responseBody);
 
             return responseBody;
         }

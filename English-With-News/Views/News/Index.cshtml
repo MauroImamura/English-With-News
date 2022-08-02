@@ -17,9 +17,20 @@
 <ul>
     @foreach(News news in Model.currentNews)
     {
+        var rowContent = "";
+        var list = news.headline.Split(" ");
+        foreach(var word in list)
+        {
+            //var item = word.Replace(",","").Replace(".","").Replace("?","").Replace("","").Replace("!","").Replace("(","").Replace(")","");
+            var element = $"<span id=\"meaningConsult\" onclick=\"searchMeaning('{@word}')\" data-id=\"{@word}\">{@word} </span>";
+            rowContent += element;
+            //rowContent += word + " ";
+        }
+        
         <li>
-            <h2 style="font-size:15px;font-weight:500">@news.headline</h2>
-            <p style="font-size:12px;font-weight:200">@news.summmary</p>
+            @Html.Raw(rowContent);
+            @*<h2 style="font-size:15px;font-weight:500">@news.headline</h2>*@
+            @*<p style="font-size:12px;font-weight:200">@news.summmary</p>*@
         </li>
     }
 </ul>
@@ -32,7 +43,8 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 
-    $('#meaningConsult').click(function () {
+    //$('.meaningConsult').click(function () {
+    function searchMeaning(word) {
         var word = $(this).attr("data-id");
         var url = "/news/Meaning";
 
@@ -62,6 +74,6 @@
             }
             );
         });
-    });
+    };
 
 </script>

@@ -1,5 +1,15 @@
 ﻿@model NewsList
 
+<style>
+    .swal2-content {
+        text-align: justify !important;
+        font-size: 15px !important;
+    }
+    .swal2-title {
+        font-size: 25px !important;
+    }
+</style>
+
 <h1 style="text-align:center">NEW LIST</h1>
 <br/>
 <p id="meaningConsult" data-id="hello">Hello</p>
@@ -31,28 +41,27 @@
             var title = information.word.toUpperCase();
             var meanings = information.meanings;
             var arr = [];
-            meanings.forEach(meanList);
+
+            for (var index = 0; index < meanings.length; index++) {
+                var mean = meanings[index].definitions;
+                for (var idx = 0; idx < mean.length; idx++){
+                    var item = mean[idx];
+                    arr.push(item.definition);
+                }
+            }
+            var m = arr.join(" || ");
 
             Swal.fire(
-                {
-                    title: title,
-                    text: meanings,
-                    //icon: "success",
-                    showCancelButton: 0,
-                    confirmButtonColor: "#6D3227",
-                    confirmButtonText: "Close"
-                }
+            {
+                title: title,
+                text: m,
+                showCancelButton: 0,
+                confirmButtonColor: "#6D3227",
+                confirmButtonText: "Close",
+                customclass: "meanModal"
+            }
             );
         });
     });
-
-    function meanList(mean){
-        var x = mean.definitions;
-        x.forEach(func)
-        function func(item)
-        {
-            console.log(item.definition);
-        };
-    };
 
 </script>

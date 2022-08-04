@@ -8,29 +8,36 @@
     .swal2-title {
         font-size: 25px !important;
     }
+    h2{
+        font-size: 20px;
+        font-weight: bold;
+    }
 </style>
 
 <h1 style="text-align:center">NEW LIST</h1>
-<br/>
-<p id="meaningConsult" data-id="hello">Hello</p>
-<br/>
+<hr/>
 <ul>
     @foreach(News news in Model.currentNews)
     {
-        var rowContent = "";
+        var rowHeader = "";
         var list = news.headline.Split(" ");
         foreach(var word in list)
         {
-            //var item = word.Replace(",","").Replace(".","").Replace("?","").Replace("","").Replace("!","").Replace("(","").Replace(")","");
-            var element = $"<span id=\"meaningConsult\" onclick=\"searchMeaning('{@word}')\" data-id=\"{@word}\">{@word} </span>";
-            rowContent += element;
-            //rowContent += word + " ";
+            var element = $"<span class=\"meaningConsult\" id=\"meaningConsult\" data-id=\"{@word}\">{@word} </span>";
+            rowHeader += element;
+        }
+
+        var rowSummary = "";
+        var list2 = news.summmary.Split(" ");
+        foreach(var word in list2)
+        {
+            var element = $"<span class=\"meaningConsult\" id=\"meaningConsult\" data-id=\"{@word}\">{@word} </span>";
+            rowSummary += element;
         }
         
         <li>
-            @Html.Raw(rowContent);
-            @*<h2 style="font-size:15px;font-weight:500">@news.headline</h2>*@
-            @*<p style="font-size:12px;font-weight:200">@news.summmary</p>*@
+            <h2>@Html.Raw(rowHeader)</h2>
+            <p>@Html.Raw(rowSummary)</p>
         </li>
     }
 </ul>
@@ -43,8 +50,8 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 
-    //$('.meaningConsult').click(function () {
-    function searchMeaning(word) {
+    $('.meaningConsult').click(function () {
+    //function searchMeaning(word) {
         var word = $(this).attr("data-id");
         var url = "/news/Meaning";
 
@@ -69,11 +76,10 @@
                 text: m,
                 showCancelButton: 0,
                 confirmButtonColor: "#6D3227",
-                confirmButtonText: "Close",
-                customclass: "meanModal"
+                confirmButtonText: "Close"
             }
             );
         });
-    };
+    });
 
 </script>

@@ -44,6 +44,12 @@ namespace English_With_News.Models
 
             HttpClient client = new HttpClient();
 
+            //if(word.IndexOf("'") >= 0)
+            //{
+            //    word = word.Split("'")[0];
+            //}
+            //word = word.Replace(",", "").Replace(".", "").Replace("?", "").Replace("", "").Replace("!", "").Replace("(", "").Replace(")", "");
+
             Uri baseLink = new Uri($"https://api.dictionaryapi.dev/api/v2/entries/en/{word}");
 
             HttpResponseMessage response = await client.GetAsync(baseLink);

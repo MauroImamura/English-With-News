@@ -8,13 +8,24 @@
     .swal2-title {
         font-size: 25px !important;
     }
+
     h2{
+        font-size: 14px;
+    }
+
+    h3{
         font-size: 20px;
         font-weight: bold;
+    }
+
+    .meaningConsult:hover {
+        color:blue;
+        text-decoration:underline;
     }
 </style>
 
 <h1 style="text-align:center">NEW LIST</h1>
+<h2 style="text-align:center">Here you can check the headlines and summaries of news avaliable on famous jornalistic platforms. By clicking on the words you can see the meanings of them.</h2>
 <hr/>
 <ul>
     @foreach(News news in Model.currentNews)
@@ -36,7 +47,7 @@
         }
         
         <li>
-            <h2>@Html.Raw(rowHeader)</h2>
+            <h3>@Html.Raw(rowHeader)</h3>
             <p>@Html.Raw(rowSummary)</p>
         </li>
     }
@@ -51,24 +62,29 @@
 <script type="text/javascript">
 
     $('.meaningConsult').click(function () {
-    //function searchMeaning(word) {
         var word = $(this).attr("data-id");
         var url = "/news/Meaning";
 
         $.post(url, { word: word }, function(data) {
-            var information = $.parseJSON(data);
-            var title = information.word.toUpperCase();
-            var meanings = information.meanings;
-            var arr = [];
-
-            for (var index = 0; index < meanings.length; index++) {
-                var mean = meanings[index].definitions;
-                for (var idx = 0; idx < mean.length; idx++){
-                    var item = mean[idx];
-                    arr.push(item.definition);
-                }
+            if (data.toUpperCase() == "NOT FOUND..") {
+                var title = data;
+                var m = "There is no match to the specified word."
             }
-            var m = arr.join(" || ");
+            else {
+                var information = $.parseJSON(data);
+                var title = information.word.toUpperCase();
+                var meanings = information.meanings;
+                var arr = [];
+
+                for (var index = 0; index < meanings.length; index++) {
+                    var mean = meanings[index].definitions;
+                    for (var idx = 0; idx < mean.length; idx++){
+                        var item = mean[idx];
+                        arr.push(item.definition);
+                    }
+                }
+                var m = arr.join(" || ");
+            }
 
             Swal.fire(
             {

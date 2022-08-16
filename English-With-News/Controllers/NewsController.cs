@@ -24,12 +24,19 @@ namespace English_With_News.Controllers
         public string Meaning(string word)
         {
             string ans = "";
-            string apiAns = _newsRepository.Meaning(word).Result;
-            apiAns = apiAns.Remove(apiAns.Length-1).Substring(1);
-            
-            if(apiAns != null)
+            try
             {
-                ans = apiAns;
+                string apiAns = _newsRepository.Meaning(word).Result;
+                apiAns = apiAns.Remove(apiAns.Length-1).Substring(1);
+            
+                if(apiAns != null)
+                {
+                    ans = apiAns;
+                }
+            }
+            catch(AggregateException ae)
+            {
+                ans = "Not Found..";
             }
 
             return ans;

@@ -10,7 +10,7 @@
     }
 
     h2{
-        font-size: 14px;
+        font-size: 16px;
     }
 
     h3{
@@ -19,14 +19,18 @@
     }
 
     .meaningConsult:hover {
-        color:blue;
+        color:aqua;
         text-decoration:underline;
     }
 </style>
 
-<h1 style="text-align:center">NEW LIST</h1>
-<h2 style="text-align:center">Here you can check the headlines and summaries of news avaliable on famous jornalistic platforms. By clicking on the words you can see the meanings of them.</h2>
-<hr/>
+<div style="background-color:#000044">
+    <h1 style="text-align:center">NEWS LIST 🧾</h1>
+    <br/>
+    <h2 style="text-align:center">Here you can check the headlines and summaries of news avaliable on famous jornalistic platforms. By clicking on the words you can see the meanings of them.</h2>
+    <hr/>
+</div>
+<br/>
 <ul>
     @foreach(News news in Model.currentNews)
     {
@@ -47,8 +51,9 @@
         }
         
         <li>
-            <h3>@Html.Raw(rowHeader)</h3>
-            <p>@Html.Raw(rowSummary)</p>
+            <h3 style="background-color: #505050">@Html.Raw(rowHeader)</h3>
+            <p style="background-color: #202020">@Html.Raw(rowSummary)</p>
+            <hr/>
         </li>
     }
 </ul>

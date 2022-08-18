@@ -44,7 +44,9 @@ namespace English_With_News.Models
 
             HttpClient client = new HttpClient();
 
-            Uri baseLink = new Uri($"https://api.dictionaryapi.dev/api/v2/entries/en/{word}");
+            string entry = word.Replace(",", "").Replace(".", "").Replace("'s", "").Replace("s'","").Replace("'","").Replace(":","");
+
+            Uri baseLink = new Uri($"https://api.dictionaryapi.dev/api/v2/entries/en/{entry}");
             HttpResponseMessage response = await client.GetAsync(baseLink);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();

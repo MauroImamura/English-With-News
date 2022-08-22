@@ -31,6 +31,8 @@ namespace English_With_News.Models
                     
                     news.headline = item.Title.Text;
                     news.summmary = item.Summary.Text;
+                    news.link = item.Id;
+                    news.publish = item.PublishDate.DateTime;
                     
                     newsList.Add(news);
                 }

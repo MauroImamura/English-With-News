@@ -6,7 +6,7 @@
 
         public string summmary { get; set; }
 
-        public IEnumerable<string> tags { get; set; }
+        public DateTime publish { get; set; }
 
         public string link { get; set; }
     }

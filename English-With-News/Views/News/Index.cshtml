@@ -22,6 +22,10 @@
         color:aqua;
         text-decoration:underline;
     }
+
+    a{
+        color:aqua
+    }
 </style>
 
 <div style="background-color:#000044">
@@ -32,7 +36,7 @@
 </div>
 <br/>
 <ul>
-    @foreach(News news in Model.currentNews)
+    @foreach(News news in Model.currentNews.OrderByDescending(x => x.publish))
     {
         var rowHeader = "";
         var list = news.headline.Split(" ");
@@ -53,6 +57,8 @@
         <li>
             <h3 style="background-color: #505050">@Html.Raw(rowHeader)</h3>
             <p style="background-color: #202020">@Html.Raw(rowSummary)</p>
+            <p>Check the complete information at: <a href="@news.link" target="_blank">@news.link</a></p>
+            <p>Published in @news.publish</p>
             <hr/>
         </li>
     }
